@@ -8,7 +8,7 @@ GIT
 
 GIT
   remote: https://github.com/vill/bemer.git
-  revision: cc5fc6331e642f2d17caa37fb0db9dacbd789a1f
+  revision: f69c723156154a361a50a9e69fe1e2d474e7c4df
   specs:
     bemer (0.1.0)
       railties (>= 3.2.22, <= 5.2)
