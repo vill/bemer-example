@@ -42,6 +42,9 @@ gem 'bemer', '~> 0.1.0', git: 'https://github.com/vill/bemer.git'
 # Bootstrap as Bemer components.
 gem 'bemer-bootstrap', '~> 0.1.0', git: 'https://github.com/vill/bemer-bootstrap.git'
 
+# Unicorn is an HTTP server for Rack applications designed to only serve fast clients on low-latency, high-bandwidth connections and take advantage of features in Unix/Unix-like kernels
+gem 'unicorn', '~> 5.3.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
