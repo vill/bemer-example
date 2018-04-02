@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/vill/bemer-bootstrap.git
-  revision: 19e5b55cf785b65a05e8d0cdbefc0cd3f7254259
+  revision: 700ea3ab54b3f9448113de69c421e146185798ee
   specs:
     bemer-bootstrap (0.1.0)
       bemer (~> 0.1.0)
