@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Пример приложения с использованием [bemer](https://github.com/vill/bemer) и [bemer-bootstrap](https://github.com/vill/bemer-bootstrap).
 
-Things you may want to cover:
+1.  Клонировать репозиторий
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    ```sh
+    git clone https://github.com/vill/bemer-example.git
+    ```
+1.  Установить зависимости
+    ```sh
+    cd bemer-example && bundle
+    ```
+1.  Запустить веб-сервер
+    ```sh
+    rails s
+    ```
+1.  Открыть в браузере http://127.0.0.1:3000
