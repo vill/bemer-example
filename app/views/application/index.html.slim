@@ -1,0 +1,148 @@
+h2 Buttons
+- twbs_contextual_classes.each do |context_class|
+  = render_component :button do |template|
+    = template.block :button do |button|
+      = button.add_cls "btn-#{context_class}"
+      = button.content context_class.to_s.humanize
+  | &nbsp;
+
+h3 Sizes
+- [:xs, :sm, nil, :lg].each do |size|
+  = render_component :button do |template|
+    = template.block :button do |button|
+      = button.add_cls 'btn-primary'
+      = button.add_cls "btn-#{size}" unless size.nil?
+      = button.content 'Button'
+  | &nbsp;
+
+h2 Progress bar
+
+h3 Basic example
+
+- (twbs_contextual_classes - %i[default primary] + [nil]).to_enum.with_index(1) do |context_class, i|
+  = render_component :progress_bar do |template|
+    = template.elem :bar do |bar|
+      = bar.add_cls 'progress-bar-striped active'
+      = bar.add_cls ['progress-bar', context_class].join('-') unless context_class.nil?
+      = bar.add_attrs 'aria-valuenow': 20 * i, style: "width: #{20 * i}%"
+      = bar.content "#{20 * i}%"
+
+h3 Stacked
+
+= render_component :progress_bar do |template|
+  = template.block(:progress).content proc { |node| 3.times { node.content } }
+  = template.elem :bar do |bar|
+    = bar.specify(->(node) { node.first? }) do |first_bar|
+      = first_bar.add_attrs 'aria-valuenow': 20, style: 'width: 20%'
+      = first_bar.add_cls 'progress-bar-danger'
+      = first_bar.content '20%'
+    = bar.specify(->(node) { node.position.eql?(2) }) do |middle_bar|
+      = middle_bar.add_attrs 'aria-valuenow': 30, style: 'width: 30%'
+      = middle_bar.add_cls 'progress-bar-striped progress-bar-warning'
+      = middle_bar.content '30%'
+    = bar.specify(->(node) { node.last? }) do |last_bar|
+      = last_bar.add_attrs 'aria-valuenow': 40, style: 'width: 40%'
+      = last_bar.add_cls 'progress-bar-striped active progress-bar-success'
+      = last_bar.content '40%'
+
+h2 Media object
+
+- 1.upto(5) do |n|
+  = render_component :media do |template|
+    = template.elem(:heading).content "Media heading #{n}"
+    = template.elem(:content).content
+      | Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+    = template.elem(:container).content
+      a href="#"
+        img.media-object alt="64x64" data-holder-rendered="true" data-src="holder.js/64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PCEtLQpTb3VyY2UgVVJMOiBob2xkZXIuanMvNjR4NjQKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNjI3YjU4YjFhZSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE2MjdiNThiMWFlIj48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIGZpbGw9IiNFRUVFRUUiLz48Zz48dGV4dCB4PSIxMy40Njg3NSIgeT0iMzYuNSI+NjR4NjQ8L3RleHQ+PC9nPjwvZz48L3N2Zz4=" style=("width: 64px; height: 64px;") /
+
+h2 Pager
+
+h3 Default example
+
+= render_component :pager do |template|
+  = template.elem(:previous).content link_to('Previous', '#')
+  = template.elem(:next).content link_to('Next', '#')
+
+h3 Aligned links
+
+= render_component :pager do |template|
+  = template.elem :previous do |prev_page|
+    = prev_page.add_cls 'previous'
+    = prev_page.content
+      = link_to '#'
+        span> aria-hidden="true" &larr;
+        | Older
+  = template.elem :next do |next_page|
+    = next_page.add_cls 'next'
+    = next_page.content
+      = link_to '#'
+        ' Newer
+        span aria-hidden="true"  &rarr;
+
+h2 Blockquotes
+= render_component :blockquote do |template|
+  = template.block(:blockquote).content 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.'
+
+= render_component :blockquote do |template|
+  = template.elem(:body).content 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.'
+  = template.elem(:footer).content
+    ' Someone famous in
+    cite title="Source Title" Source Title
+
+= render_component :blockquote do |template|
+  = template.block(:blockquote).cls 'blockquote-reverse'
+  = template.elem(:body).content 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.'
+  = template.elem(:footer).content
+    ' Someone famous in
+    cite title="Source Title" Source Title
+
+h2 Modals
+- [:sm, nil, :lg].each do |size|
+  = render_component :button do |template|
+    = template.block :button do |button|
+      = button.add_attrs data: { target: ["#my-modal", size].reject(&:nil?).join('-'), toggle: :modal }
+      = button.add_cls ['btn-primary'] << ("btn-#{size}" unless size.nil?)
+      = button.content ['Launch demo modal', size].reject(&:nil?).join(' ')
+  | &nbsp;
+
+  = render_component :modal do |template|
+    = template.block :modal do |modal|
+      = modal.add_attrs id: ["my-modal", size].reject(&:nil?).join('-')
+      = modal.specify(elem: :title).content 'Modal title'
+      = modal.specify(elem: :dialog).add_cls "modal-#{size}" unless size.nil?
+      = modal.specify(elem: :body).content 'Modal body'
+      = modal.specify(elem: :footer).content
+        button.btn.btn-default data-dismiss="modal" type="button" Close
+        button.btn.btn-primary type="button" Save changes
+
+h2 Alerts
+- (twbs_contextual_classes - %i[default primary]).each do |context_class|
+  = render_component :alert do |template|
+    = template.block :alert do |alert|
+      = alert.add_cls [:alert, context_class].join('-')
+      = alert.specify(elem: :message).content
+        strong> Bootstrap
+        | provides an easy way to create predefined
+        =< link_to 'alert messages', 'https://getbootstrap.com/docs/3.3/components/#alerts', class: 'alert-link', target: :_blank
+        |.
+
+h2 Dismissible alerts
+- (twbs_contextual_classes - %i[default primary]).each do |context_class|
+  = render_component :alert_dismissible do |template|
+    = template.block :alert do |alert|
+      = alert.add_cls [:alert, context_class].join('-')
+      = alert.specify(elem: :message).content
+        strong> Bootstrap
+        | provides an easy way to create predefined
+        =< link_to 'alert messages', 'https://getbootstrap.com/docs/3.3/components/#alerts', class: 'alert-link', target: :_blank
+        |.
+
+h2 Panels
+- twbs_contextual_classes.each do |context_class|
+  = render_component :panel do |template|
+    = template.block :panel do |panel|
+      = panel.add_cls [:panel, context_class].join('-')
+      = panel.specify(elem: :title).content 'Panel title'
+      = panel.specify(elem: :body).content 'Panel content'
+      = panel.specify(elem: :footer).content 'Panel footer'
