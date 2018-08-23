@@ -9,7 +9,7 @@
     ```
 1.  Установить зависимости
     ```sh
-    cd bemer-example && bundle
+    cd bemer-example && bundle && yarn
     ```
 1.  Запустить веб-сервер
     ```sh
